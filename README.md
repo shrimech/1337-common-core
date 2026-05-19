@@ -64,6 +64,7 @@ make fclean
 
 # Rebuild from scratch
 make re
+```
 
 ---
 
