@@ -6,18 +6,18 @@
    - The Mandatory part of the subject.pdf involves using the Guided Partitioning Method of the Debian installation. The Bonus part of the subject.pdf involves using the Manual Partitioning Method. This guide has instructions for the Manual Partitioning Method, which I recommend you do from the start, thus passing you both the Mandatory part, and 1/3 of the Bonus part of Born2beRoot. 
 
 ## 🔷 Outline of Steps:
-   - Step 1: [Download the Debian installer for your Virtual Machine (VM)](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-1-download-the-debian-installer-for-your-virtual-machine-vm)
-   - Step 2: [Installing your VM](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-2-installing-your-vm)
-   - Step 3: [Setting up your VM partitions](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-3-setting-up-your-vm-partitions)
-   - Step 4: [Starting & setting up your VM](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-4-starting--setting-up-your-vm)
-   - Step 5: [Connecting to SSH](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-5-connecting-to-ssh)
-   - Step 6: [Configuring your VM - Password Policy](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-6-configuring-your-vm---password-policy)
-   - Step 7: [Creating user Groups](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-7-creating-user-groups)
-   - Step 8: [Configuring your VM - User Priviledges](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-8-configuring-your-vm---user-priviledges)
-   - Step 9: [Configuring your VM - Script Monitoring & Crontab](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-9-configuring-your-vm---script-monitoring--crontab)
-   - Step 10: [Self-evaluation Checklist & Testing](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-10-self-evaluation-checklist--testing)
-   - Step 11: [Retrieve the Signature of your machine’s virtual disk](https://github.com/Thuggonaut/42_IC_Ring01_Born2beRoot#-step-11-retrieve-the-signature-of-your-machines-virtual-disk)
-   - Step 12: [Evaluation Answers](https://github.com/Thuggonaut/42IC_Ring01_Born2beRoot/blob/main/README.md#-step-12-evaluation-answers)
+   - Step 1: [Download the Debian installer for your Virtual Machine (VM)](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-1-download-the-debian-installer-for-your-virtual-machine-vm)
+   - Step 2: [Installing your VM](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-2-installing-your-vm)
+   - Step 3: [Setting up your VM partitions](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-3-setting-up-your-vm-partitions)
+   - Step 4: [Starting & setting up your VM](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-4-starting--setting-up-your-vm)
+   - Step 5: [Connecting to SSH](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-5-connecting-to-ssh)
+   - Step 6: [Configuring your VM - Password Policy](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-6-configuring-your-vm---password-policy)
+   - Step 7: [Creating user Groups](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-7-creating-user-groups)
+   - Step 8: [Configuring your VM - User Priviledges](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-8-configuring-your-vm---user-priviledges)
+   - Step 9: [Configuring your VM - Script Monitoring & Crontab](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-9-configuring-your-vm---script-monitoring--crontab)
+   - Step 10: [Self-evaluation Checklist & Testing](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-10-self-evaluation-checklist--testing)
+   - Step 11: [Retrieve the Signature of your machine’s virtual disk](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-11-retrieve-the-signature-of-your-machines-virtual-disk)
+   - Step 12: [Evaluation Answers](github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#-step-12-evaluation-answers)
 
 ## 🔷 Step 1: Download the Debian installer for your Virtual Machine (VM)
 
