@@ -480,8 +480,8 @@ Note: I recommend going through the checklist yourself to ensure everything work
 
 ### 🔸 10.5: Password policy
 - [ ] `sudo chage -l <username>` checks the newly created user password follows the required policy (30 days max, 2 days min, 7 days warning).
-- [ ] [How do you implement the password policy?](https://github.com/Thuggonaut/42IC_Ring01_Born2beRoot/blob/main/README.md#to-set-up-the-password-policy)
-- [ ] [What are the advantages & disadvantages of the password policy?](https://github.com/Thuggonaut/42IC_Ring01_Born2beRoot/blob/main/README.md#the-advantages-of-the-password-policy)
+- [ ] [How do you implement the password policy?]([https://github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot](https://github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#to-set-up-the-password-policy)
+- [ ] [What are the advantages & disadvantages of the password policy?](https://github.com/shrimech/1337-common-core/tree/main/Level-01/Born2beRoot#the-advantages-of-the-password-policy)
 
 	
 ### 🔸 10.6: Hostname and partitions
