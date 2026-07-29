@@ -4,7 +4,7 @@
 A comprehensive collection of projects from the 42 Network curriculum covering C, algorithms, systems programming, game development, threading, and C++ OOP fundamentals and advanced concepts.
 
 **Author**: shrimech  
-**Status**: Levels 01-04 Complete (2024-2025)
+**Status**: Levels 01-05 Complete (2024-2026)
 
 ## Table of Contents
 
@@ -15,6 +15,7 @@ A comprehensive collection of projects from the 42 Network curriculum covering C
 - [Level 02: Intermediate](#level-02-intermediate)
 - [Level 03: Advanced Systems](#level-03-advanced-systems)
 - [Level 04: Expert](#level-04-expert)
+- [Level 05: Advanced Network Systems](#level-05-advanced-network-systems)
 
 ---
 ## Shared Resources
@@ -77,6 +78,7 @@ This repository documents the 42 Common Core curriculum journey with progressive
 - **Level 02**: Algorithms, IPC, and 2D graphics
 - **Level 03**: Shell implementation and threading
 - **Level 04**: C++ OOP and 3D graphics
+- **Level 05**: Advanced network systems with IRC server development
 
 ---
 
@@ -243,6 +245,19 @@ Raycasting-based 3D graphics engine (Wolfenstein 3D style) with texture mapping 
 
 ---
 
+## Level 05: Advanced Network Systems
+
+### ft_irc - IRC Server Implementation
+A C++98-based Internet Relay Chat server implementing core protocol features over non-blocking sockets and an event-driven networking loop.
+- Non-blocking network I/O with a multiplexed server architecture
+- User registration flow and command handling for IRC protocol messages
+- Channel management features including join, topic, invite, kick, and mode operations
+- Private messaging and broadcast communication between clients
+
+**Key Concepts**: Network programming, sockets, event-driven architecture, protocol implementation, concurrent client handling
+
+---
+
 ## Level-00
 
 ### libft - C Standard Library Implementation
@@ -291,4 +306,3 @@ make fclean
 
 # Rebuild from scratch
 make re
->>>>>>> master
