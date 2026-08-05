@@ -55,7 +55,7 @@ int	ScalarConverter::checkInput()
 	{
 		return (CHAR);
 	}
-	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-") || this->getInput().find_first_of("+-") != 0) // catches any multiple or mixed use of + and -
+	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-") || this->getInput().find_first_of("+-") != 0 && this->getInput().find_first_of("+-") != std::string::npos) // catches any multiple or mixed use of + and - 
 		return (ERROR);
 	else if (this->getInput().find_first_not_of("+-0123456789") == std::string::npos)
 		return (INT);
