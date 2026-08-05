@@ -3,33 +3,33 @@
 
 ScalarConverter::ScalarConverter()
 {
-	std::cout << "ScalarConverter Default Constructor called" << std::endl;
+	std::cout << "{DEBUG}ScalarConverter Default Constructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const std::string input): _input(input)
 {
-	std::cout << "ScalarConverter Constructor for " << this->getInput() << std::endl;
+	std::cout << "{DEBUG}ScalarConverter Constructor for " << this->getInput() << std::endl;
 	this->_double = atof(this->getInput().c_str());
-	std::cout << "Double value: " << this->_double << std::endl;
+	std::cout << "{DEBUG}Double value: " << this->_double << std::endl;
 	this->convertInput();
 	this->printOutput();
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter &src): _input(src.getInput())
 {
-	std::cout << "ScalarConverter Copy Constructor called" << std::endl;
+	std::cout << "{DEBUG}ScalarConverter Copy Constructor called" << std::endl;
 	*this = src;
 	this->printOutput();
 }
 
 ScalarConverter::~ScalarConverter()
 {
-	std::cout << "ScalarConverter Deconstructor called" << std::endl;
+	std::cout << "{DEBUG}ScalarConverter Deconstructor called" << std::endl;
 }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
-	std::cout << "ScalarConverter Assignation operator called" << std::endl;
+	std::cout << "{DEBUG}ScalarConverter Assignation operator called" << std::endl;
 	if (this == &src)
 		return *this;
 
@@ -55,7 +55,7 @@ int	ScalarConverter::checkInput()
 	{
 		return (CHAR);
 	}
-	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-")) // catches any multiple or mixed use of + and -
+	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-") || this->getInput().find_first_of("+-") != 0) // catches any multiple or mixed use of + and -
 		return (ERROR);
 	else if (this->getInput().find_first_not_of("+-0123456789") == std::string::npos)
 		return (INT);
