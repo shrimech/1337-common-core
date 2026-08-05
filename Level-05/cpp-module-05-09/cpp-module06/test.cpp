@@ -1,17 +1,15 @@
 #include <typeinfo>
 #include <iostream>
+#include <iomanip>
 using namespace std;
 class salmi{int a;double b;};
 int main() {
-    salmi a;
-    float b = 3.2f;
-    int r = 5;
-    char d = 1;
-    double e = 5.00;
+double d = -167777555555555.0;
 
-    cout << typeid(salmi) << endl;
-    cout << typeid(b).name() << endl;
-    cout << typeid(d).name() << endl;
-    cout << typeid(e).name() << endl;
-
+float f = static_cast<float>(d);
+int i = static_cast<int>(d);
+std::cout << "d: " << std::setprecision(1) << std::fixed << d << std::endl;
+std::cout << "f: " << std::setprecision(1) << std::fixed << f << std::endl;
+std::cout << "i: " << i << std::endl;
+std::cout << "i == f: " << (i == f) << std::endl;
 }

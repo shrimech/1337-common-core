@@ -7,6 +7,9 @@
 #include <cstdlib>
 #include <cstring>
 #include <cctype>
+#include <iomanip>
+#include <cfloat>
+#include <cmath>
 
 #define NAN_INF 1
 #define ERROR 2

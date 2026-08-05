@@ -3,33 +3,33 @@
 
 ScalarConverter::ScalarConverter()
 {
-	std::cout << "{DEBUG}ScalarConverter Default Constructor called" << std::endl;
+	// std::cout << "{DEBUG}ScalarConverter Default Constructor called" << std::endl;
 }
 
 ScalarConverter::ScalarConverter(const std::string input): _input(input)
 {
-	std::cout << "{DEBUG}ScalarConverter Constructor for " << this->getInput() << std::endl;
+	// std::cout << "{DEBUG}ScalarConverter Constructor for " << this->getInput() << std::endl;
 	this->_double = atof(this->getInput().c_str());
-	std::cout << "{DEBUG}Double value: " << this->_double << std::endl;
+	// std::cout << "{DEBUG}Double value: " << this->_double << std::endl;
 	this->convertInput();
 	this->printOutput();
 }
 
 ScalarConverter::ScalarConverter(const ScalarConverter &src): _input(src.getInput())
 {
-	std::cout << "{DEBUG}ScalarConverter Copy Constructor called" << std::endl;
+	// std::cout << "{DEBUG}ScalarConverter Copy Constructor called" << std::endl;
 	*this = src;
 	this->printOutput();
 }
 
 ScalarConverter::~ScalarConverter()
 {
-	std::cout << "{DEBUG}ScalarConverter Deconstructor called" << std::endl;
+	// std::cout << "{DEBUG}ScalarConverter Deconstructor called" << std::endl;
 }
 
 ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 {
-	std::cout << "{DEBUG}ScalarConverter Assignation operator called" << std::endl;
+	// std::cout << "{DEBUG}ScalarConverter Assignation operator called" << std::endl;
 	if (this == &src)
 		return *this;
 
@@ -43,7 +43,7 @@ ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
 
 int	ScalarConverter::checkInput()
 {
-	if (this->getInput().compare("nan") == 0 || this->getInput().compare("+inf") == 0 ||
+	if (this->getInput().compare("nan") == 0  || this->getInput().compare("nanf") == 0 || this->getInput().compare("+inf") == 0 ||
 		this->getInput().compare("-inf") == 0 || this->getInput().compare("+inff") == 0 ||
 		this->getInput().compare("-inff") == 0)
 	{
@@ -55,7 +55,7 @@ int	ScalarConverter::checkInput()
 	{
 		return (CHAR);
 	}
-	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-") || this->getInput().find_first_of("+-") != 0 && this->getInput().find_first_of("+-") != std::string::npos) // catches any multiple or mixed use of + and - 
+	else if (this->getInput().find_first_of("+-") != this->getInput().find_last_of("+-") || (this->getInput().find_first_of("+-") != 0 && this->getInput().find_first_of("+-") != std::string::npos)) // catches any multiple or mixed use of + and - 
 		return (ERROR);
 	else if (this->getInput().find_first_not_of("+-0123456789") == std::string::npos)
 		return (INT);
@@ -90,7 +90,7 @@ int	ScalarConverter::checkInput()
 
 void ScalarConverter::fromChar(void)
 {
-	this->_char = static_cast<unsigned char>(this->getInput()[0]);
+	this->_char = this->getInput()[0];
 	this->_int = static_cast<int>(this->getChar());
 	this->_float = static_cast<float>(this->getChar());
 	this->_double = static_cast<double>(this->getChar());
@@ -98,7 +98,7 @@ void ScalarConverter::fromChar(void)
 void ScalarConverter::fromInt(void)
 {
 	this->_int = static_cast<int>(this->getDouble());
-	this->_char = static_cast<unsigned char>(this->getInt());
+	this->_char = static_cast<char>(this->getInt());
 	this->_float = static_cast<float>(this->getDouble());
 }
 void ScalarConverter::fromFloat(void)
@@ -138,7 +138,7 @@ void	ScalarConverter::convertInput(void)
 
 void	ScalarConverter	::printOutput(void)const
 {
-	if (this->getType() != NAN_INF && this->getDouble() <= UCHAR_MAX && this->getDouble() >= 0)
+	if (this->getType() != NAN_INF && this->getDouble() <= CHAR_MAX && this->getDouble() >= -127)
 	{
 		if (isprint(this->getChar()))
 			std::cout << "char: '" << this->getChar() << "'" << std::endl;
@@ -148,47 +148,43 @@ void	ScalarConverter	::printOutput(void)const
 	else
 		std::cout << "char: impossible" << std::endl;
 
-	if (this->getType() != NAN_INF && this->getDouble() >= std::numeric_limits<int>::min() && this->getDouble() <= std::numeric_limits<int>::max())
+	if (this->getType() != NAN_INF &&this->getInput().length() < 11 && this->getInt() >= INT_MIN && this->getInt() <= INT_MAX)
 	{
 		std::cout << "int: " << this->getInt() << std::endl;
 	}
 	else
 		std::cout << "int: impossible" << std::endl;
 
-	if (this->getType() != NAN_INF)
+	if (this->getType() != NAN_INF && this->getFloat() <= std::numeric_limits<float>::max() && this->getFloat() >= -std::numeric_limits<float>::max())
 	{
-		std::cout << "float: " << this->getFloat();
-		if (this->getFloat() - this->getInt() == 0)
-			{std::cout << ".0f" << std::endl;}
-		else
+		if (this->getFloat() != this->getFloat())
+			std::cout << "float: nanf" << std::endl;
+		else{
+			std::cout << "float: "<<std::fixed <<  std::setprecision(7) << this->getFloat();
+			std::cout << "float: "<<std::fixed <<  std::setprecision(1) << this->getFloat();
 			std::cout << "f" << std::endl;
+		}
 	}
 	else
 	{
 		if (this->getInput() == "nan" || this->getInput() == "nanf")
 			std::cout << "float: nanf" << std::endl;
-		else if (this->getInput()[0] == '+')
+		else if (this->getInput()[0] != '-')
 			std::cout << "float: +inff" << std::endl;
 		else
 			std::cout << "float: -inff" << std::endl;
 	}
 
-	if (this->getType() != NAN_INF)
+	if (this->getType() != NAN_INF && !std::isinf(this->getDouble()))
 	{
-		std::cout << "double: " << this->getDouble();
-		if (this->getDouble() < std::numeric_limits<int>::min() || this->getDouble() > std::numeric_limits<int>::max() ||
-			this->getDouble() - this->getInt() == 0)
-		{
-			std::cout << ".0" << std::endl;
-		}
-		else
-			std::cout << std::endl;
+		std::cout << "double: " << std::setprecision(1) << std::fixed << this->getDouble();
+		std::cout << std::endl;		
 	}
 	else
 	{
 		if (this->getInput() == "nan" || this->getInput() == "nanf")
 			std::cout << "double: nan" << std::endl;
-		else if (this->getInput()[0] == '+')
+		else if (this->getInput()[0] != '-')
 			std::cout << "double: +inf" << std::endl;
 		else
 			std::cout << "double: -inf" << std::endl;
