@@ -47,8 +47,8 @@ static void identify(Base &Test)
 {
 	while (i < 3)
 	{
-		void *foo = NULL; // only to initialize the unused var
-		Base &unused = (Base &)foo; // only to prevent the -Werror from triggering for unused value of the casts
+		// void *foo = NULL; // only to initialize the unused var
+		Base unused = (Base &)Test; // only to prevent the -Werror from triggering for unused value of the casts
 		try
 		{
 			if (i == 0)
@@ -58,7 +58,7 @@ static void identify(Base &Test)
 			else if (i == 2)
 				unused = dynamic_cast<C &>(Test);
 			else
-				std::cout << "unknow type" << std::endl;
+				std::cout << "P :unknown type" << std::endl;
 			(void)unused;
 		}
 		catch (std::exception &e)
@@ -67,7 +67,7 @@ static void identify(Base &Test)
 			identify(Test);
 			return;
 		}
-		std::cout << classes[i] << " is the identified type" << std::endl;
+		std::cout <<  "P: " << classes[i] << std::endl;
 		i = 0;
 		break;
 	}
@@ -79,13 +79,19 @@ int main()
 	for (int j = 0; j < 5; j++)
 	{
 		Base *Test = generate();
+		Base *Test2 = new Base;
 		if (Test == NULL)
 			return (1);
 		else
 		{
 			identify(Test);
+			identify(Test2);
+			std::cout << "------------------------" <<std::endl;
+			i = 0;
 			identify(*Test);
+			identify(*Test2);
 			delete (Test);
+			delete (Test2);
 
 			std::cout << std::endl;
 		}
