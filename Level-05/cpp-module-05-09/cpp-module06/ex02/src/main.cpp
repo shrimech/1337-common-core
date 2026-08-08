@@ -39,38 +39,36 @@ static void identify(Base *Test)
 		std::cout << "unknown type" << std::endl;
 }
 
-static int i = 0;
-static std::string classes[] = {"A", "B", "C"};
-
-
-static void identify(Base &Test)
+static void identify(Base &p)
 {
-	while (i < 3)
+	try
 	{
-		// void *foo = NULL; // only to initialize the unused var
-		Base unused = (Base &)Test; // only to prevent the -Werror from triggering for unused value of the casts
-		try
-		{
-			if (i == 0)
-				unused = dynamic_cast<A &>(Test);
-			else if (i == 1)
-				unused = dynamic_cast<B &>(Test);
-			else if (i == 2)
-				unused = dynamic_cast<C &>(Test);
-			else
-				std::cout << "P :unknown type" << std::endl;
-			(void)unused;
-		}
-		catch (std::exception &e)
-		{
-			i++;
-			identify(Test);
-			return;
-		}
-		std::cout <<  "P: " << classes[i] << std::endl;
-		i = 0;
-		break;
+		A &a = dynamic_cast<A &>(p);
+		(void)a;
+		std::cout << "A is the identified type" << std::endl;
+		return;
 	}
+	catch (std::exception &e) {}
+
+	try
+	{
+		B &b = dynamic_cast<B &>(p);
+		(void)b;
+		std::cout << "B is the identified type" << std::endl;
+		return;
+	}
+	catch (std::exception &e) {}
+
+	try
+	{
+		C &c = dynamic_cast<C &>(p);
+		(void)c;
+		std::cout << "C is the identified type" << std::endl;
+		return;
+	}
+	catch (std::exception &e) {}
+
+	std::cout << "unknown type" << std::endl;
 }
 
 int main()
@@ -87,7 +85,6 @@ int main()
 			identify(Test);
 			identify(Test2);
 			std::cout << "------------------------" <<std::endl;
-			i = 0;
 			identify(*Test);
 			identify(*Test2);
 			delete (Test);

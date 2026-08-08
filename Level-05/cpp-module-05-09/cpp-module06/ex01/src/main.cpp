@@ -16,6 +16,6 @@ int main(void)
 	std::cout << "Round-trip successful: " << std::boolalpha << (deserializedData == data) << std::endl;
 
 	delete data;
-	delete deserializedData;
+	// delete deserializedData;
 	return 0;
 }

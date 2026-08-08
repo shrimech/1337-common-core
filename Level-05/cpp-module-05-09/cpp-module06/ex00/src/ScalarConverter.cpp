@@ -160,7 +160,7 @@ void	ScalarConverter	::printOutput(void)const
 		if (this->getFloat() != this->getFloat())
 			std::cout << "float: nanf" << std::endl;
 		else{
-			std::cout << "float: "<<std::fixed <<  std::setprecision(7) << this->getFloat();
+			// std::cout << "float: "<<std::fixed <<  std::setprecision(7) << this->getFloat();
 			std::cout << "float: "<<std::fixed <<  std::setprecision(1) << this->getFloat();
 			std::cout << "f" << std::endl;
 		}

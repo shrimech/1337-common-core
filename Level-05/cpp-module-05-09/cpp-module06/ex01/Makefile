@@ -1,6 +1,6 @@
 NAME = serialize
 CXX = c++
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror --std=c++98
 SRCS = src/Serialize.cpp src/main.cpp
 OBJS = $(SRCS:.cpp=.o)
 
