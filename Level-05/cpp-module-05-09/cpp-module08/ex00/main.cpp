@@ -14,7 +14,7 @@ int main() {
     strVec.push_back("bar");
     
     
-    try {
+    try { 
         std::vector<int>::iterator it = easyfind(vec, 3); 
         std::cout << "Found value: " << *it << std::endl; 
     } catch (const std::runtime_error &e) { 
@@ -27,6 +27,8 @@ int main() {
         std::cerr << e.what() << std::endl; 
     }
     
+
+
     
     try { 
         std::vector<std::string>::iterator it = easyfind(strVec, "foo"); 
