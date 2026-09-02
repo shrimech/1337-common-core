@@ -7,8 +7,7 @@ OBJFILES = $(INFILES:.cpp=.o)
 
 NAME = btc
 
-all: $(NAME) install
-
+all:  $(NAME) 
 $(NAME):$(OBJFILES)
 	$(C++) $(C++_FLAGS) $(OBJFILES) -o $(NAME) 
 
