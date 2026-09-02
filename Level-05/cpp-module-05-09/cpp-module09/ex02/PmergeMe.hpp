@@ -34,8 +34,6 @@ void	init_main_chain2(std::deque<int> *main_chain, std::deque< std::pair<int, in
 void	binary_search_insertion2(std::deque<int> *main_chain, std::deque<int>::iterator end, int val);
 void	insert_into_main_chain2(std::deque< std::pair<int, int> > dequey, std::deque<int> *main_chain, int additional_value);
 void	print_after2(std::deque<int> main_chain);
-
-
 //std::list<int>::iterator find_insert_position(std::list<int>::iterator start, std::list<int>::iterator end, int val);
 
 #endif
