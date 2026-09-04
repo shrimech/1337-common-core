@@ -49,7 +49,7 @@ void BitcoinExchange::loadRates()
             std::string date, price;
             std::istringstream ss(line);
             std::getline(ss, date, ',');
-            std::getline(ss, price, ',');
+            std::getline(ss, price);
 
             // Parse price using istringstream
             double priceValue;
@@ -82,7 +82,7 @@ void BitcoinExchange::processFile(char const *fileName)
 		double priceValue;
 		std::istringstream ss(line);
 		std::getline(ss, date, '|');
-		std::getline(ss, valueStr, '|');
+		std::getline(ss, valueStr);
 
 		// Validate date format.
 		if (!date.empty())
@@ -105,30 +105,65 @@ void BitcoinExchange::processFile(char const *fileName)
 	file.close();
 }
 
-// Validate date format that it contains only numbers and '-'. And the month block is between 01 and 12 and the day block is between 01 and 31.
 bool BitcoinExchange::isValidDate(std::string const &date)
 {
-	if (date.size() != 10 || date[4] != '-' || date[7] != '-')
-		return (false);
-	for (int i = 0; i < 10; i++)
-	{
-		if (i == 4 || i == 7)
-			continue;
-		if (isdigit(date[i]) == 0)
-			return (false);
-	}
+    if (date.size() != 10)
+        return false;
 
-	if (date[5] == '0' && date[6] == '0') 
-		return (false);
-	if ((date[5] == '1' && date[6] > '2') || date[5] > '1')
-		return (false);
+    if (date[4] != '-' || date[7] != '-')
+        return false;
 
-	if (date[8] == '0' && date[9] == '0')
-		return (false);
-	if ((date[8] == '3' && date[9] > '1') || date[8] > '3')
-		return (false);
-	
-	return (true);
+    for (int i = 0; i < 10; i++)
+    {
+        if (i == 4 || i == 7)
+            continue;
+
+        if (!std::isdigit(date[i]))
+            return false;
+    }
+
+    int year = std::atoi(date.substr(0, 4).c_str());
+    int month = std::atoi(date.substr(5, 2).c_str());
+    int day = std::atoi(date.substr(8, 2).c_str());
+
+    if (month < 1 || month > 12)
+        return false;
+
+    int maxDay;
+
+    if (month == 2)
+    {
+        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
+            maxDay = 29;
+        else
+            maxDay = 28;
+    }
+    else if (month == 4 || month == 6 || month == 9 || month == 11)
+        maxDay = 30;
+    else
+      maxDay = 31;
+
+    if (day < 1 || day > maxDay)
+        return false;
+
+
+    std::time_t t = std::time(NULL);
+    std::tm *today = std::localtime(&t);
+
+    int todayYear = today->tm_year + 1900;
+    int todayMonth = today->tm_mon + 1;
+    int todayDay = today->tm_mday;
+
+    if (year > todayYear)
+        return false;
+
+    if (year == todayYear && month > todayMonth)
+        return false;
+
+    if (year == todayYear && month == todayMonth && day > todayDay)
+        return false;
+
+    return true;
 }
 
 double BitcoinExchange::getValue(std::string const &valueStr)
