@@ -62,6 +62,17 @@ void BitcoinExchange::loadRates()
         file.close();
 }
 
+static void removeLeadingTrailingSpaces(std::string &str)
+{
+	size_t start = str.find_first_not_of(" \t");
+	size_t end = str.find_last_not_of(" \t");
+
+	if (start == std::string::npos || end == std::string::npos)
+		str = "";
+	else
+		str = str.substr(start, end - start + 1);
+}
+
 void BitcoinExchange::processFile(char const *fileName)
 {
 	std::ifstream file(fileName);
@@ -83,19 +94,15 @@ void BitcoinExchange::processFile(char const *fileName)
 		std::istringstream ss(line);
 		std::getline(ss, date, '|');
 		std::getline(ss, valueStr);
+		removeLeadingTrailingSpaces(date);
+		removeLeadingTrailingSpaces(valueStr);
 
-		// Validate date format.
-		if (!date.empty())
-			date = date.erase(date.length() -1);
 		if (isValidDate(date) == false)
 		{
 			std::cout << "Error: bad input => " << date << std::endl;
 			continue;
 		}
 
-		// Parse price using istringstream
-		if(!valueStr.empty())
-			valueStr = valueStr.erase(0, 1);
 		priceValue = getValue(valueStr);
 		if (priceValue != -1)
 			printResult(date, priceValue);
