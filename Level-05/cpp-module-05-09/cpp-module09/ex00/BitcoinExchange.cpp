@@ -175,44 +175,55 @@ bool BitcoinExchange::isValidDate(std::string const &date)
 
 double BitcoinExchange::getValue(std::string const &valueStr)
 {
-	double priceValue;
+	if (valueStr.empty() || valueStr.find_first_not_of("0123456789.") != std::string::npos)
+	{
+		std::cout << "Error: bad input "  << std::endl;
+		return (-1);
+	}
+	double priceValue ;
 	std::istringstream priceStream(valueStr);
 
 	if (!(priceStream >> priceValue))
 	{
-		std::cout << "Error: bad value input => " << priceValue << std::endl;
+		std::cout << "Error: bad input => " << priceValue << std::endl;
 		return (-1);
 	}
 
 	if (priceValue < 0)
 	{
-		std::cout << "Error: not a positive number => " << priceValue << std::endl;
+		std::cout << "Error: not a positive number " << std::endl;
 		return (-1);
 	}
 	else if (priceValue > 1000)
 	{
-		std::cout << "Error: too large number => " << priceValue << std::endl;
+		std::cout << "Error: too large number " << std::endl;
 		return (-1);
 	}
 	
 	return (priceValue);
 }
 
-// printResult multiplies the value by the rate for the date, or by the closest earlier rate.
+
+
+
 void BitcoinExchange::printResult(std::string const &date, double value)
 {
-	std::map<std::string, double>::iterator it = _rates.find(date);
-	if (it != _rates.end())
-		std::cout << date << " | " << value << " | " << value * it->second << std::endl;
-	else
+	std::map<std::string, double>::iterator it = _rates.lower_bound(date);
+
+	if (it != _rates.end() && it->first == date)
 	{
-		std::map<std::string, double>::iterator it2 = _rates.lower_bound(date);
-		if (it2 == _rates.begin())
-			std::cout << date << " | " << value << " | " << value * it2->second << std::endl;
-		else
-		{
-			it2--;
-			std::cout << date << " | " << value << " | " << value * it2->second << std::endl;
-		}
+		std::cout << date << " | " << value << " | " << value * it->second << std::endl;
+		return;
 	}
+
+	if (it == _rates.begin())
+	{
+		std::cerr << "Error: date is too early." << std::endl;
+		return;
+	}
+
+	--it;
+
+	std::cout << date << " | " << value << " | " << value * it->second << std::endl;
 }
+
