@@ -30,7 +30,6 @@ class BitcoinExchange
 		void processFile(char const *fileName);
 
 
-		// Exceptions which printing error message
 		class CouldNotOpenFile : public std::exception
 		{
 			public:
@@ -49,14 +48,6 @@ class BitcoinExchange
 				}
 		};
 
-		class InvalidDateFormat : public std::exception
-		{
-			public:
-				virtual const char *what() const throw()
-				{
-					return ("Invalid date format. Expected 'YYYY-MM-DD'");
-				}
-		};
 
 		class InvalidPriceFormat : public std::exception
 		{

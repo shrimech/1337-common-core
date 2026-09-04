@@ -18,18 +18,15 @@ class RPN
 		double _divide(double a, double b);
 
 	public:
-		//Constructors
 		RPN();
 		RPN(const std::string  &inputStr);
 		RPN(const RPN &other);
 		RPN &operator=(const RPN &other);
 		~RPN();
 
-		//Getters
 		double getResult() const;
 
 
-		//Exceptions
 		class invalidArgument : public std::runtime_error
 		{
 			public:

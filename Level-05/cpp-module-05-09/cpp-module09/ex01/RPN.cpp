@@ -13,7 +13,7 @@ RPN::RPN(const std::string &inputStr)
 
 	while (std::getline(ss, token, ' '))
 	{
-		if ((token.length() == 1 && isdigit(token[0])) || (token.length() == 2 && token[0] == '-' && isdigit(token[1])))
+		if ((token.length() == 1 && isdigit(token[0])))
 		{
 			std::stringstream(token) >> num;
 			_stack.push(num);
@@ -47,7 +47,6 @@ RPN::~RPN()
 {
 }
 
-// Exceptions
 RPN::invalidArgument::invalidArgument(const std::string& msg) : std::runtime_error(msg)
 {
 }
@@ -71,7 +70,6 @@ double RPN::getResult() const
 	return (_stack.top());
 }
 
-// Private methods
 void RPN::_executeStack(double (RPN::*f)(double, double))
 {
 	double a;
