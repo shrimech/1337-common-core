@@ -1,36 +1,36 @@
 #include "PmergeMe.hpp"
 
-std::vector<int> PmergeMe::generateJacobsthal(int n)
+std::vector<int> PmergeMe::generateSequence(int n)
 {
-    std::vector<int> sequence;
+    std::vector<int> Sequence;
 
-    sequence.push_back(1);
+    Sequence.push_back(1);
 
     int a = 1, b = 3, c = 1;
 
-    int currentIndex = 0;
+    int currentJacob = 0;
 
     while (b <= n)
     {
-        sequence.push_back(b);
+        Sequence.push_back(b);
 
         for (int i = b - 1; i > c; i--)
-            sequence.push_back(i);
+            Sequence.push_back(i);
 
         c = b;
-        currentIndex = b + 2 * a;
+        currentJacob = b + 2 * a;
         a = b;
-        b = currentIndex;
+        b = currentJacob;
     }
 
     for (int i = n; i > c; --i)
-        sequence.push_back(i);
+        Sequence.push_back(i);
 
-    return sequence;
+    return Sequence;
 }
 
 // int main(){
-//     std::vector<int> a = generateJacobsthal(10);
+//     std::vector<int> a = generateSequence(10);
 //     for (int i= 0 ; i < a.size() ; i++) 
 //         std::cout << a[i] << std::endl;
 // }
@@ -54,36 +54,36 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vec)
         vec.pop_back();
     }
 
-    std::vector<int> losers;
-    std::vector<int> winners;
+    std::vector<int> small;
+    std::vector<int> big;
 
     for (size_t i = 0; i < vec.size(); i += 2)
     {
         if (vec[i] > vec[i + 1])
         {
-            losers.push_back(vec[i + 1]);
-            winners.push_back(vec[i]);
+            small.push_back(vec[i + 1]);
+            big.push_back(vec[i]);
         }
         else
         {
-            losers.push_back(vec[i]);
-            winners.push_back(vec[i + 1]);
+            small.push_back(vec[i]);
+            big.push_back(vec[i + 1]);
         }
     }
 
-    std::vector<int> winnersTmp = winners;
-    std::vector<int> sortedA = PmergeMe::sortVector(winnersTmp);
+    std::vector<int> bigTmp = big;
+    std::vector<int> sortedA = PmergeMe::sortVector(bigTmp);
 
     std::vector<int> sortedB(sortedA.size());
-    std::vector<bool> used(winners.size(), false);
+    std::vector<bool> used(big.size(), false);
 
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (sortedA[i] == winners[j]  && !used[j])
+            if (sortedA[i] == big[j]  && !used[j])
             {
-                sortedB[i] = losers[j];
+                sortedB[i] = small[j];
                 used[j] = true;
                 break;
             }
@@ -104,7 +104,7 @@ std::vector<int> PmergeMe::sortVector(std::vector<int> &vec)
     if (oddNumber != -1)
         rest.push_back(oddNumber);
 
-    std::vector<int> order = generateJacobsthal(rest.size());
+    std::vector<int> order = generateSequence(rest.size());
 
     for (size_t i = 0; i < order.size(); i++)
     {
@@ -150,36 +150,36 @@ std::deque<int> PmergeMe::sortDeque(std::deque<int> &deq)
         deq.pop_back();
     }
 
-    std::deque<int> losers;
-    std::deque<int> winners;
+    std::deque<int> small;
+    std::deque<int> big;
 
     for (size_t i = 0; i < deq.size(); i += 2)
     {
         if (deq[i] > deq[i + 1])
         {
-            losers.push_back(deq[i + 1]);
-            winners.push_back(deq[i]);
+            small.push_back(deq[i + 1]);
+            big.push_back(deq[i]);
         }
         else
         {
-            losers.push_back(deq[i]);
-            winners.push_back(deq[i + 1]);
+            small.push_back(deq[i]);
+            big.push_back(deq[i + 1]);
         }
     }
 
-    std::deque<int> winnersTmp = winners;
-    std::deque<int> sortedA = PmergeMe::sortDeque(winnersTmp);
+    std::deque<int> bigTmp = big;
+    std::deque<int> sortedA = PmergeMe::sortDeque(bigTmp);
 
     std::deque<int> sortedB(sortedA.size());
-    std::vector<bool> used(winners.size(), false);
+    std::vector<bool> used(big.size(), false);
 
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (winners[j] == sortedA[i] && !used[j])
+            if (big[j] == sortedA[i] && !used[j])
             {
-                sortedB[i] = losers[j];
+                sortedB[i] = small[j];
                 used[j] = true;
                 break;
             }
@@ -200,7 +200,7 @@ std::deque<int> PmergeMe::sortDeque(std::deque<int> &deq)
     if (oddNumber != -1)
         rest.push_back(oddNumber);
 
-    std::vector<int> order = generateJacobsthal(rest.size());
+    std::vector<int> order = generateSequence(rest.size());
     for (size_t i = 0; i < order.size(); i++)
     {
         size_t idx = order[i] - 1;

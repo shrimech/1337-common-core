@@ -19,7 +19,7 @@ private:
     double _vectorTime;
     double _dequeTime;
 
-    std::vector<int> generateJacobsthal(int n);
+    std::vector<int> generateSequence(int n);
 
     std::vector<int> sortVector(std::vector<int> &vec);
     std::deque<int> sortDeque(std::deque<int> &deq);
