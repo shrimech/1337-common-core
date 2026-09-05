@@ -2,13 +2,12 @@
 #define PMERGEME_HPP
 
 #include <climits>
-#include <cstdlib>
 #include <deque>
 #include <exception>
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include <sys/time.h>
-#include <utility>
 #include <vector>
 
 class PmergeMe

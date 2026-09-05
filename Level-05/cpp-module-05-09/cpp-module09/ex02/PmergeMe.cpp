@@ -1,5 +1,4 @@
 #include "PmergeMe.hpp"
-#include <algorithm>
 
 std::vector<int> PmergeMe::generateJacobsthal(int n)
 {
