@@ -17,7 +17,7 @@ $(NAME):$(OBJCT)
 install: data.csv input.txt
 
 data.csv:
-	wget https://cdn.intra.42.fr/document/document/52890/cpp_09.tgz
+	wget https://cdn.intra.42.fr/document/document/56838/cpp_09.tgz
 	@tar -xzf cpp_09.tgz
 	@cp cpp_09/data.csv $@
 	@rm -rf cpp_09 cpp_09.tgz
