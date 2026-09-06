@@ -13,16 +13,16 @@
 class PmergeMe
 {
 private:
-    std::vector<int> _vectorData;
-    std::deque<int> _dequeData;
+    std::vector<int> _vector;
+    std::deque<int> _deque;
 
-    double _vectorTime;
-    double _dequeTime;
+    double timev;
+    double timed;
 
     std::vector<int> generateSequence(int n);
 
-    std::vector<int> sortVector(std::vector<int> &vec);
-    std::deque<int> sortDeque(std::deque<int> &deq);
+    std::vector<int> sortV(std::vector<int> &vec);
+    std::deque<int> sortD(std::deque<int> &deq);
 
 public:
     PmergeMe();

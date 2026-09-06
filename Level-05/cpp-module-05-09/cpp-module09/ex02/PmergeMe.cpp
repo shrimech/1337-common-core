@@ -29,13 +29,12 @@ std::vector<int> generateSequence(int n)
     return Sequence;
 }
 
-int main(){
-    std::vector<int> a = generateSequence(10);
-    for (int i= 0 ; i < a.size() ; i++) 
-        std::cout << a[i] << std::endl;
-}
-
-// std::vector<int> PmergeMe::sortVector(std::vector<int> &vec)
+// int main(){
+//     std::vector<int> a = generateSequence(10);
+//     for (int i= 0 ; i < a.size() ; i++) 
+//         std::cout << a[i] << std::endl;
+// }
+// std::vector<int> PmergeMe::sortV(std::vector<int> &vec)
 // {
 //     if (vec.size() < 2)
 //         return vec;
@@ -72,7 +71,8 @@ int main(){
 //     }
 
 //     std::vector<int> bigTmp = big;
-//     std::vector<int> sortedA = PmergeMe::sortVector(bigTmp);
+//     // std::vector<int> sortedA = PmergeMe::sortV(bigTmp);
+//     std::vector<int> sortedA = sortV(bigTmp);
 
 //     std::vector<int> sortedB(sortedA.size());
 //     std::vector<bool> used(big.size(), false);
@@ -131,114 +131,147 @@ int main(){
 //     return vec;
 // }
 
-// std::deque<int> PmergeMe::sortDeque(std::deque<int> &deq)
+
+// int main()
 // {
-//     if (deq.size() < 2)
-//         return deq;
+//     std::vector<int> vec = {5, 2, 9, 1, 5, 6};
+//     std::vector<int> sortedVec = sortV(vec);
 
-//     if (deq.size() == 2)
-//     {
-//         if (deq[0] > deq[1])
-//             std::swap(deq[0], deq[1]);
-//         return deq;
-//     }
+//     std::cout << "Sorted vector: ";
+//     for (size_t i = 0; i < vec.size(); ++i)
+//         std::cout << vec[i] << " ";
+//     std::cout << std::endl;
 
-//     int oddNumber = -1;
-//     if (deq.size() % 2 != 0)
-//     {
-//         oddNumber = deq.back();
-//         deq.pop_back();
-//     }
-
-//     std::deque<int> small;
-//     std::deque<int> big;
-
-//     for (size_t i = 0; i < deq.size(); i += 2)
-//     {
-//         if (deq[i] > deq[i + 1])
-//         {
-//             small.push_back(deq[i + 1]);
-//             big.push_back(deq[i]);
-//         }
-//         else
-//         {
-//             small.push_back(deq[i]);
-//             big.push_back(deq[i + 1]);
-//         }
-//     }
-
-//     std::deque<int> bigTmp = big;
-//     std::deque<int> sortedA = PmergeMe::sortDeque(bigTmp);
-
-//     std::deque<int> sortedB(sortedA.size());
-//     std::vector<bool> used(big.size(), false);
-
-//     for (size_t i = 0; i < sortedA.size(); i++)
-//     {
-//         for (size_t j = 0; j < sortedA.size(); j++)
-//         {
-//             if (big[j] == sortedA[i] && !used[j])
-//             {
-//                 sortedB[i] = small[j];
-//                 used[j] = true;
-//                 break;
-//             }
-//         }
-//     }
-
-//     std::deque<int> res;
-//     res.push_back(sortedB[0]);
-
-//     std::deque<int> rest(sortedB.size() - 1);
-
-//     for (size_t i = 1; i < sortedB.size(); i++)
-//         rest[i - 1] = sortedB[i];
-
-//     for (size_t i = 0; i < sortedA.size(); i++)
-//         res.push_back(sortedA[i]);
-
-//     if (oddNumber != -1)
-//         rest.push_back(oddNumber);
-
-//     std::vector<int> order = generateSequence(rest.size());
-//     for (size_t i = 0; i < order.size(); i++)
-//     {
-//         size_t idx = order[i] - 1;
-//         int target = rest[idx];
-
-//         std::deque<int>::iterator bound;
-
-//         int dec = oddNumber == -1 ? 0 : 1;
-//         if (idx < rest.size() - dec)
-//         {
-//             int pairedWinner = sortedA[idx + 1];
-//             bound = std::find(res.begin(), res.end(), pairedWinner);
-//         }
-//         else
-//             bound = res.end();
-
-//         std::deque<int>::iterator pos = std::lower_bound(res.begin(), bound, target);
-
-//         res.insert(pos, target);
-//     }
-//     deq = res;
-//     return deq;
+//     return 0;
 // }
+
+//---------------------------------------------------------------------------------------------------------------
+
+
+
+std::deque<int> sortD(std::deque<int> &deq)
+{
+    if (deq.size() < 2)
+        return deq;
+
+    if (deq.size() == 2)
+    {
+        if (deq[0] > deq[1])
+            std::swap(deq[0], deq[1]);
+        return deq;
+    }
+
+    int oddNumber = -1;
+    if (deq.size() % 2 != 0)
+    {
+        oddNumber = deq.back();
+        deq.pop_back();
+    }
+
+    std::deque<int> small;
+    std::deque<int> big;
+
+    for (size_t i = 0; i < deq.size(); i += 2)
+    {
+        if (deq[i] > deq[i + 1])
+        {
+            small.push_back(deq[i + 1]);
+            big.push_back(deq[i]);
+        }
+        else
+        {
+            small.push_back(deq[i]);
+            big.push_back(deq[i + 1]);
+        }
+    }
+
+    std::deque<int> bigTmp = big;
+    std::deque<int> sortedA = sortD(bigTmp);
+
+    std::deque<int> sortedB(sortedA.size());
+    std::vector<bool> used(big.size(), false);
+
+    for (size_t i = 0; i < sortedA.size(); i++)
+    {
+        for (size_t j = 0; j < sortedA.size(); j++)
+        {
+            if (big[j] == sortedA[i] && !used[j])
+            {
+                sortedB[i] = small[j];
+                used[j] = true;
+                break;
+            }
+        }
+    }
+
+    std::deque<int> res;
+    res.push_back(sortedB[0]);
+
+    std::deque<int> rest(sortedB.size() - 1);
+
+    for (size_t i = 1; i < sortedB.size(); i++)
+        rest[i - 1] = sortedB[i];
+
+    for (size_t i = 0; i < sortedA.size(); i++)
+        res.push_back(sortedA[i]);
+
+    if (oddNumber != -1)
+        rest.push_back(oddNumber);
+
+    std::vector<int> order = generateSequence(rest.size());
+    for (size_t i = 0; i < order.size(); i++)
+    {
+        size_t idx = order[i] - 1;
+        int target = rest[idx];
+
+        std::deque<int>::iterator bound;
+
+        int dec = oddNumber == -1 ? 0 : 1;
+        if (idx < rest.size() - dec)
+        {
+            int pairedWinner = sortedA[idx + 1];
+            bound = std::find(res.begin(), res.end(), pairedWinner);
+        }
+        else
+            bound = res.end();
+
+        std::deque<int>::iterator pos = std::lower_bound(res.begin(), bound, target);
+
+        res.insert(pos, target);
+    }
+    deq = res;
+    return deq;
+}
+
+int main()
+{
+    std::deque<int> deq = {5, 2, 9, 1, 5, 6};
+    std::deque<int> sortedDeq = sortD(deq);
+
+    std::cout << "Sorted deque: ";
+    for (size_t i = 0; i < deq.size(); ++i)
+        std::cout << deq[i] << " ";
+    std::cout << std::endl;
+
+    return 0;
+}
+
+// ---------------------------------------------------------------------------------------------
 
 // PmergeMe::PmergeMe() {}
 
 // PmergeMe::PmergeMe(const PmergeMe &other)
 // {
-//     _vectorData = other._vectorData;
-//     _dequeData = other._dequeData;
+//     _vector = other._vector;
+//     _deque = other._deque;
 // }
 
 // PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 // {
 //     if (this != &other)
 //     {
-//         _vectorData = other._vectorData;
-//         _dequeData = other._dequeData;
+//         _vector = other._vector;
+//         _deque = other._deque;
 //     }
 //     return *this;
 // }
@@ -266,18 +299,18 @@ int main(){
 
 //             long value = std::atol(num.c_str());
 
-//             if (std::find(_vectorData.begin(), _vectorData.end(), value) != _vectorData.end())
+//             if (std::find(_vector.begin(), _vector.end(), value) != _vector.end())
 //                 throw std::exception();
 
 //             if (value < 0 || value > INT_MAX)
 //                 throw std::exception();
 
-//             _vectorData.push_back(static_cast<int>(value));
-//             _dequeData.push_back(static_cast<int>(value));
+//             _vector.push_back(static_cast<int>(value));
+//             _deque.push_back(static_cast<int>(value));
 //         }
 //     }
 
-//     if (_vectorData.size() < 2 || _dequeData.size() < 2)
+//     if (_vector.size() < 2 || _deque.size() < 2)
 //         throw std::exception();
 // }
 
@@ -286,14 +319,14 @@ int main(){
 //     struct timeval start, end;
 
 //     gettimeofday(&start, NULL);
-//     sortVector(_vectorData);
+//     sortV(_vector);
 //     gettimeofday(&end, NULL);
-//     _vectorTime = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+//     timev = (end.tv_sec - start.tv_sec) * 1000000 + (end.tv_usec - start.tv_usec);
 
 //     gettimeofday(&start, NULL);
-//     sortDeque(_dequeData);
+//     sortD(_deque);
 //     gettimeofday(&end, NULL);
-//     _dequeTime = (end.tv_sec - start.tv_sec) * 1000000.0 + (end.tv_usec - start.tv_usec);
+//     timed = (end.tv_sec - start.tv_sec) *  1000000 + (end.tv_usec - start.tv_usec);
 // }
 
 // void PmergeMe::printResults(char **argv, int argc) const
@@ -304,15 +337,15 @@ int main(){
 //     std::cout << std::endl;
 
 //     std::cout << "After:  ";
-//     for (size_t i = 0; i < _vectorData.size(); ++i)
-//         std::cout << _vectorData[i] << " ";
+//     for (size_t i = 0; i < _vector.size(); ++i)
+//         std::cout << _vector[i] << " ";
 //     std::cout << std::endl;
 
-//     std::cout << "Time to process a range of " << _vectorData.size()
-//               << " elements with std::vector : " << _vectorTime << " us" << std::endl;
+//     std::cout << "Time to process a range of " << _vector.size()
+//               << " elements with std::vector : " << timev << " us" << std::endl;
 
-//     std::cout << "Time to process a range of " << _dequeData.size()
-//               << " elements with std::deque  : " << _dequeTime << " us" << std::endl;
+//     std::cout << "Time to process a range of " << _deque.size()
+//               << " elements with std::deque  : " << timed << " us" << std::endl;
 // }
 
 // PmergeMe::~PmergeMe() {}
