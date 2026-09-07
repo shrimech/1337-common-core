@@ -80,16 +80,14 @@ std::vector<int> PmergeMe::sortV(std::vector<int> &vec)
     // std::vector<int> sortedA = sortV(bigTmp);
 
     std::vector<int> sortedB(sortedA.size());
-    std::vector<bool> used(big.size(), false);
 
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (sortedA[i] == big[j]  && !used[j])
+            if (sortedA[i] == big[j])
             {
                 sortedB[i] = small[j];
-                used[j] = true;
                 break;
             }
         }
@@ -128,7 +126,9 @@ std::vector<int> PmergeMe::sortV(std::vector<int> &vec)
 
         std::vector<int>::iterator bound;
 
-        int dec = oddNumber == -1 ? 0 : 1;
+        int dec = 0;
+        if(oddNumber != -1)
+            dec = 1;
         if (idx < rest.size() - dec)
         {
             int pairedWinner = sortedA[idx + 1];
@@ -213,16 +213,14 @@ std::deque<int> PmergeMe::sortD(std::deque<int> &deq)
     std::deque<int> sortedA = PmergeMe::sortD(bigTmp);
 
     std::deque<int> sortedB(sortedA.size());
-    std::vector<bool> used(big.size(), false);
 
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (big[j] == sortedA[i] && !used[j])
+            if (big[j] == sortedA[i])
             {
                 sortedB[i] = small[j];
-                used[j] = true;
                 break;
             }
         }
