@@ -80,14 +80,16 @@ std::vector<int> PmergeMe::sortV(std::vector<int> &vec)
     // std::vector<int> sortedA = sortV(bigTmp);
 
     std::vector<int> sortedB(sortedA.size());
+    std::vector<bool> used(big.size(), false);
 
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (sortedA[i] == big[j])
+            if (sortedA[i] == big[j] && !used[j])
             {
                 sortedB[i] = small[j];
+                used[j] = true;
                 break;
             }
         }
@@ -194,7 +196,7 @@ std::deque<int> PmergeMe::sortD(std::deque<int> &deq)
 
     std::deque<int> small;
     std::deque<int> big;
-
+    
     for (size_t i = 0; i < deq.size(); i += 2)
     {
         if (deq[i] > deq[i + 1])
@@ -213,14 +215,15 @@ std::deque<int> PmergeMe::sortD(std::deque<int> &deq)
     std::deque<int> sortedA = PmergeMe::sortD(bigTmp);
 
     std::deque<int> sortedB(sortedA.size());
-
+    std::vector<bool> used(big.size(), false);
     for (size_t i = 0; i < sortedA.size(); i++)
     {
         for (size_t j = 0; j < sortedA.size(); j++)
         {
-            if (big[j] == sortedA[i])
+            if (big[j] == sortedA[i] && !used[j])
             {
                 sortedB[i] = small[j];
+                used[j] = true;
                 break;
             }
         }
@@ -320,8 +323,8 @@ void PmergeMe::processInput(int argc, char **argv)
 
             long value = std::atol(num.c_str());
 
-            if (std::find(_vector.begin(), _vector.end(), value) != _vector.end())
-                throw std::exception();
+            // if (std::find(_vector.begin(), _vector.end(), value) != _vector.end())
+            //     throw std::exception();
 
             if (value < 0 || value > INT_MAX)
                 throw std::exception();
